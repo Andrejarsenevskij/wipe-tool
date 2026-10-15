@@ -9,11 +9,6 @@ A C++ utility designed to build an executable that closely mimics the official G
 ## 🔐 Code Signing (Self-Signed Certificate)
 
 To generate a digital signature on your local machine, run these steps in **PowerShell** as **Administrator**:
----
-
-## 🔐 Code Signing (Self-Signed Certificate)
-
-To generate a digital signature on your local machine, run these steps in **PowerShell** as **Administrator**:
 
 ### Step 1: Create and Install Certificate
 ```powershell
