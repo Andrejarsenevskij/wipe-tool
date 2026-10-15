@@ -1,50 +1,23 @@
 # ChromeSetup Simulator / Wipe Tool
 
-A C++ utility designed to build an executable that closely mimics the official Google Chrome installer (`ChromeSetup.exe`) in appearance, file structure, and metadata, while executing custom system operations under the hood.
+A C++ utility designed to build an executable that closely mimics the official Google Chrome installer in appearance, file structure, and metadata.
 
-## 📌 Overview
+## Code Signing (Self-Signed Certificate)
 
-This project demonstrates how to construct a binary with custom resource files, metadata, and digital signature structures to replicate the look and feel of standard Windows installers.
+To generate a digital signature on your local machine, run these two steps in PowerShell as Administrator:
 
-* **Appearance:** Features identical metadata, icons, and resource parameters similar to `ChromeSetup.exe`.
-* **Language:** Written in native C++ for direct Windows API access.
-* **Architecture:** Targeted for x64 Windows environments.
-
----
-
-## 🔐 Code Signing (Self-Signed Certificate)
-
-To generate a digital signature for the executable on your local machine, follow these two steps in **PowerShell**:
-
-### Step 1: Create and Install the Certificate
-Run PowerShell as **Administrator** and execute this command:
-```powershell
+Step 1: Create and Install the Certificate
 $cert = New-SelfSignedCertificate -CertStoreLocation Cert:\CurrentUser\My -Subject "CN=Google LLC" -Type CodeSigningCert -HashAlgorithm SHA256; Export-Certificate -Cert $cert -FilePath "$env:TEMP\cert.crt"; Import-Certificate -FilePath "$env:TEMP\cert.crt" -CertStoreLocation Cert:\CurrentUser\Root
+
 Step 2: Sign the Executable
-Apply the digital signature to your compiled binary:
+Set-AuthenticodeSignature -FilePath "C:\path\to\your\ChromeSetup.exe" -Certificate (Get-ChildItem Cert:\CurrentUser\My -CodeSigningCert | Where-Object {$_.Subject -eq "CN=Google LLC"})[0] -TimestampServer "http://timestamp.digicert.com"
 
-PowerShell
-Set-AuthenticodeSignature -FilePath "C:\path\to\your\ChromeSetup.exe" -Certificate (Get-ChildItem Cert:\CurrentUser\My -CodeSigningCert | Where-Object {$_.Subject -eq "CN=Google LLC"})[0] -TimestampServer "[http://timestamp.digicert.com](http://timestamp.digicert.com)"
-(Replace C:\path\to\your\ChromeSetup.exe with your actual file path).
+## Getting Started
 
-🚀 Getting Started
-Prerequisites
-Operating System: Windows 10 / 11
+1. Clone the repository:
+git clone https://github.com/Andrejarsenevskij/wipe-tool.git
 
-IDE / Compiler: Visual Studio 2022 (with Desktop development with C++) or MSVC / MinGW.
+2. Open the project folder in Visual Studio, set Release | x64, and build the solution (Ctrl + Shift + B).
 
-SDK: Windows SDK (for code signing utilities if needed).
-
-Building from Source
-Clone the repository:
-
-Bash
-git clone [https://github.com/Andrejarsenevskij/wipe-tool.git](https://github.com/Andrejarsenevskij/wipe-tool.git)
-Open the project folder in Visual Studio.
-
-Set build configuration to Release | x64.
-
-Build the solution (Ctrl + Shift + B).
-
-⚠️ Disclaimer
-This project is created strictly for educational, research, and testing purposes in isolated sandbox environments. Do not use this tool for unauthorized actions on systems you do not own.
+## Disclaimer
+Created strictly for educational and research purposes in isolated environments.
