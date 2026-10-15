@@ -2,6 +2,13 @@
 
 A C++ utility designed to build an executable that closely mimics the official Google Chrome installer in appearance, file structure, and metadata.
 
+> **⚠️ Disclaimer:** This project is created strictly for **educational and research purposes** in isolated testing environments.
+
+---
+
+## 🔐 Code Signing (Self-Signed Certificate)
+
+To generate a digital signature on your local machine, run these steps in **PowerShell** as **Administrator**:
 ---
 
 ## 🔐 Code Signing (Self-Signed Certificate)
@@ -23,6 +30,3 @@ git clone [https://github.com/Andrejarsenevskij/wipe-tool.git](https://github.co
 
 2. Build
 Open the project in Visual Studio, set configuration to Release | x64, and press Ctrl + Shift + B.
-
-⚠️ Disclaimer
-Created strictly for educational and research purposes in isolated testing environments.
