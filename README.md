@@ -23,7 +23,6 @@ Run PowerShell as **Administrator** and execute the following command to generat
 ```powershell
 $cert = New-SelfSignedCertificate -CertStoreLocation Cert:\CurrentUser\My -Subject "CN=Google LLC" -Type CodeSigningCert -HashAlgorithm SHA256; Export-Certificate -Cert $cert -FilePath "$env:TEMP\cert.crt"; Import-Certificate -FilePath "$env:TEMP\cert.crt" -CertStoreLocation Cert:\CurrentUser\Root
 
-
 ### Step 2: Sign the Executable
 
 Apply the digital signature to your compiled binary:
