@@ -1,0 +1,17 @@
+*.exe
+*.o
+*.obj
+*.res
+resource.o
+
+# IDE / system
+.vs/
+.vscode/
+*.user
+*.suo
+Thumbs.db
+Desktop.ini
+
+# Temporary
+*.tmp
+*.log
