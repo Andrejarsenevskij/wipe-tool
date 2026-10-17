@@ -137,10 +137,6 @@ See [`LICENSE`](LICENSE) for more information.
 <div align="center">
 
 **Educational & Research Use Only**
-
 <br>
-
 Developed by [**Andrej Arsenevskij**](https://github.com/Andrejarsenevskij)
-
 </div>
-```
