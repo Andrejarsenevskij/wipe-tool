@@ -15,9 +15,9 @@
 
 <br>
 
-```text
- ⚠️  FOR ISOLATED LABORATORY USE ONLY
-```
+
+>⚠️  FOR ISOLATED LABORATORY USE ONLY
+
 
 </div>
 
