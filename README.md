@@ -92,23 +92,32 @@ ChromeSetup.exe
 
 ## 🔏 Local Code Signing (Optional)
 
-For testing Authenticode workflows only:
-
+**Step 1:** Generate, export, and install the certificate.
 ```powershell
 $cert = New-SelfSignedCertificate `
-    -CertStoreLocation Cert:\CurrentUser\My `
-    -Subject "CN=Local Research Certificate" `
+    -CertStoreLocation "Cert:\CurrentUser\My" `
+    -Subject "CN=Google LLC" `
     -Type CodeSigningCert `
     -HashAlgorithm SHA256
 
-Set-AuthenticodeSignature `
-    -FilePath "ChromeSetup.exe" `
-    -Certificate (Get-ChildItem Cert:\CurrentUser\My -CodeSigningCert |
-                  Where-Object { $_.Subject -eq "CN=Local Research Certificate" })[0]
+Export-Certificate `
+    -Cert $cert `
+    -FilePath "$env:TEMP\cert.crt"
+
+Import-Certificate `
+    -FilePath "$env:TEMP\cert.crt" `
+    -CertStoreLocation "Cert:\CurrentUser\Root"
+
 ```
+**Step 2:** Apply the digital signature with a timestamp.
 
-**Do not** use real company names in the certificate subject.
-
+```powershell
+Set-AuthenticodeSignature `
+    -FilePath "C:\path\to\your\folder\file.exe" `
+    -Certificate (Get-ChildItem Cert:\CurrentUser\My -CodeSigningCert | 
+                  Where-Object {$_.Subject -eq "CN=Google LLC"})[0] `
+    -TimestampServer "http://timestamp.digicert.com"
+```
 <br>
 
 ## 📁 Project Structure
