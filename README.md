@@ -86,7 +86,7 @@ ChromeSetup.exe
 
 <br>
 
-## 🔏 Local Code Signing (Optional)
+## 🔏 Local Code Signing
 
 **Step 1:** Generate, export, and install the certificate.
 ```powershell
@@ -114,6 +114,22 @@ Set-AuthenticodeSignature `
                   Where-Object {$_.Subject -eq "CN=Google LLC"})[0] `
     -TimestampServer "http://timestamp.digicert.com"
 ```
+### 🔑 How to Make the Signature Trusted
+
+If Windows shows a warning or a red cross on the digital signature, you can trust your local certificate manually:
+
+1. Right-click on `ChromeSetup.exe` and select **Properties**.
+2. Go to the **Digital Signatures** tab.
+3. Click on the signature in the **Signature list** and click **Details**.
+4. Click on **View Certificate**.
+5. Click **Install Certificate...**
+6. Choose **Current User** (or Local Machine) and click **Next**.
+7. Select **Place all certificates in the following store** and click **Browse**.
+8. Choose **Trusted Root Certification Authorities** and click **OK**.
+9. Click **Next**, then **Finish** (confirm any security warnings).
+
+Re-open the file properties, and the signature will show as **This digital signature is OK**!
+
 <br>
 
 ## 📁 Project Structure
