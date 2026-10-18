@@ -15,10 +15,6 @@
 
 <br>
 
-```
- ⚠️  FOR ISOLATED LABORATORY USE ONLY
-```
-
 </div>
 
 ---
